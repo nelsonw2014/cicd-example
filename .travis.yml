@@ -1,0 +1,20 @@
+language: go
+go:
+- 1.10.x
+env:
+- GIMME_OS=linux GIMME_ARCH=amd64
+- GIMME_OS=darwin GIMME_ARCH=amd64
+- GIMME_OS=windows GIMME_ARCH=amd64
+script:
+- go test -v -race ./...
+- go vet ./...
+- go build
+
+deploy:
+  provider: releases
+  api_key:
+    secure: xsf92v8FLezMFK3P7xv0E3xDqe/P5MSOYhVE+DpNPML7OmrjrUPMMt2ofMZz9ia8rLUNAYpwNNRDvVCzdvHT67EZLyIg8hjclmcP3syOy28POMS2wF7sqgpdUtqIJ2lg6fGHXIDbx0l1WAHOr5aW6YnWVXWQpPKhbNvA+3Yzgsspf44tQNUDRX9SW89oUoi5qr2r60l7BIZZvZpmtQdtUHkAEs0MF3v0hUa8QOZeh18CxAamqjuPr3OZA1R9a3k6k+G7HjeYYbTh9ItCT8tKMmmrBo3flVjGlJhlCDYGuWcMNaO+mUno1EOaP4KmZC7zaTBbGhZGqxdp5noOObhx4VpAolgXmmBRzl0f0576iEWNq7fmy9/npH7KbaCmjyx3fizaKrBop2GDdPNUJJFhroZolVAqks6B68yGoR0D6kRtLcfIDdIiEUqh3tvCLSmbA0x7+MGwsC3mECX0EYwEnMiViOvPeVU4vGl5GK27yLBgvlgboWlFEhEgxugV6NmkUio3j8WswQ1ayGbfr6MWjdwzi2/WylCymrlOQCSH+eUicOnOX/i/FmECK7syqnabe5bKuRgR+lKny2gRzfXxrbHoY8Tq2cJqaiEewW918NsiRcE3sNTwSUdGhRgolZX2fyGHGh/ZJnxDhIrLOrcRlxCPQSVrBXHxIh30JWRVEJ8=
+  file: cicd-example
+  on:
+    repo: nelsonw2014/cicd-example
+    branch: master
