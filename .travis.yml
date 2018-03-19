@@ -17,12 +17,12 @@ script:
 - go build
 
 before_deploy:
-- mv cicd-example cicd-example-${GIMME_OS}-${GIMME_ARCH}
+- if [[ "$GIMME_OS" != "windows" ]] ; then mv cicd-example cicd-example-${GIMME_OS}-${GIMME_ARCH} ; else mv cicd-example.exe cicd-example-${GIMME_OS}-${GIMME_ARCH}.exe ; fi
 
 deploy:
   skip_cleanup: true
   name: 0.0.${TRAVIS_BUILD_NUMBER}
-  tag: 0.0.${TRAVIS_BUILD_NUMBER}
+  tag_name: 0.0.${TRAVIS_BUILD_NUMBER}
   provider: releases
   file_glob: true
   file: cicd-example-*
