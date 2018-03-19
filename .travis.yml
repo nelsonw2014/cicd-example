@@ -18,11 +18,11 @@ script:
 
 before_deploy:
 - if [[ "$GIMME_OS" != "windows" ]] ; then mv cicd-example cicd-example-${GIMME_OS}-${GIMME_ARCH} ; else mv cicd-example.exe cicd-example-${GIMME_OS}-${GIMME_ARCH}.exe ; fi
+- export TRAVIS_TAG=0.0.${TRAVIS_BUILD_NUMBER}
 
 deploy:
   skip_cleanup: true
   name: 0.0.${TRAVIS_BUILD_NUMBER}
-  tag_name: 0.0.${TRAVIS_BUILD_NUMBER}
   provider: releases
   file_glob: true
   file: cicd-example-*
